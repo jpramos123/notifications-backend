@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-class DriftEmailPayloadAggregator extends AbstractEmailPayloadAggregator {
+public class DriftEmailPayloadAggregator extends AbstractEmailPayloadAggregator {
 
     private static final String DRIFT_KEY = "drift";
     private static final String HOST_KEY = "hosts";
@@ -18,14 +18,14 @@ class DriftEmailPayloadAggregator extends AbstractEmailPayloadAggregator {
     private static final String CONTEXT_KEY = "context";
     private static final String EVENTS_KEY = "events";
     private static final String PAYLOAD_KEY = "payload";
-    
+
     // Drift Payload
     private static final String BASELINE_ID = "baseline_id";
     private static final String BASELINE_NAME = "baseline_name";
 
     private static final String DISPLAY_NAME = "display_name";
     private static final String INVENTORY_ID = "inventory_id";
-    private static final String TAGS = "tags";  
+    private static final String TAGS = "tags";
 
     private final Set<String> uniqueHosts = new HashSet<>();
     private final Map<String, HashSet<String>> uniqueHostPerBaseline = new HashMap<>();
@@ -38,7 +38,7 @@ class DriftEmailPayloadAggregator extends AbstractEmailPayloadAggregator {
         return null;
     }
 
-    DriftEmailPayloadAggregator() {
+    public DriftEmailPayloadAggregator() {
         context.put(DRIFT_KEY, new JsonObject());
     }
 
@@ -81,7 +81,7 @@ class DriftEmailPayloadAggregator extends AbstractEmailPayloadAggregator {
         this.context.put(UNIQUE_SYSTEM_COUNT, this.uniqueHosts.size());
     }
 
-    Integer getUniqueHostCount() {
+    public Integer getUniqueHostCount() {
         return this.uniqueHosts.size();
     }
 

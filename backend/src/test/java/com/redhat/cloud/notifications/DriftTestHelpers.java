@@ -4,13 +4,14 @@ import com.redhat.cloud.notifications.ingress.Action;
 import com.redhat.cloud.notifications.ingress.Event;
 import com.redhat.cloud.notifications.ingress.Metadata;
 import com.redhat.cloud.notifications.models.EmailAggregation;
+import com.redhat.cloud.notifications.transformers.BaseTransformer;
 import io.vertx.core.json.JsonObject;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
-class DriftTestHelpers{
+public class DriftTestHelpers {
 
     public static BaseTransformer baseTransformer = new BaseTransformer();
 
@@ -37,15 +38,15 @@ class DriftTestHelpers{
                         .newBuilder()
                         .setMetadataBuilder(Metadata.newBuilder())
                         .setPayload(Map.of(
-                            "baseline_id": baselineId,
-                            "baseline_name": "drift_baseline_test",
+                            "baseline_id", baselineId,
+                            "baseline_name", "drift_baseline_test"
                         ))
                         .build()
         ));
 
         emailActionMessage.setAccountId(tenant);
 
-        JsonObject payload = baseTransformer.transform(emailActionMessage);
+        JsonObject payload = baseTransformer.transform(emailActionMessage).await().indefinitely();
         aggregation.setPayload(payload);
 
         return aggregation;
